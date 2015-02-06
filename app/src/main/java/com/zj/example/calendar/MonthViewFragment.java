@@ -30,7 +30,7 @@ public class MonthViewFragment extends Fragment{
 
         MonthViewFragment fragment = new MonthViewFragment();
         fragment.mListener = listener;
-        fragment.mMonth = month;4444
+        fragment.mMonth = month;
         fragment.mCells = cells;
         return fragment;
     }
