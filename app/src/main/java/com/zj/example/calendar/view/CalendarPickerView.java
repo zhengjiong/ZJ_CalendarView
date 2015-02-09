@@ -118,20 +118,19 @@ public class CalendarPickerView extends ViewPager{
     /**
      * 獲取給定年月的數據
      * @param year
-     * @param monthOfYear
+     * @param month
      * @return
      */
-    private List<List<MonthCellDescriptor>> getMonthCell(int year, int monthOfYear) {
-        //指定年月的第一天
-        LocalDate monthLocalDate = new LocalDate(year, monthOfYear, 1);
+    private List<List<MonthCellDescriptor>> getMonthCell(int year, int month) {
+        //月的第一天
+        LocalDate monthLocalDate = new LocalDate(year, month, 1);
 
         List<List<MonthCellDescriptor>> monthDescriLists = Lists.newArrayList();
 
-        if (monthLocalDate.withDayOfMonth(1).getDayOfWeek() == DateTimeConstants.SUNDAY) {
-            monthLocalDate = monthLocalDate.withDayOfMonth(1);
-        } else {
-            //如果本月的第一天不是星期天,則顯示上一個星期
-            monthLocalDate = monthLocalDate.withDayOfMonth(1).minusWeeks(1).withDayOfWeek(7);
+        if (monthLocalDate.getDayOfWeek() != DateTimeConstants.SUNDAY) {
+            //monthLocalDate = monthLocalDate.withDayOfMonth(1);
+            //如果本月的第一天不是星期天,則從上周星期天開始顯示
+            monthLocalDate = monthLocalDate.minusWeeks(1).withDayOfWeek(7);
         }
 
         for (int i = 0; i < 6; i++) {//一月顯示六周的數據
@@ -140,15 +139,15 @@ public class CalendarPickerView extends ViewPager{
                 MonthCellDescriptor cell = new MonthCellDescriptor(
                         new LocalDate(monthLocalDate.getYear(), monthLocalDate.getMonthOfYear(), monthLocalDate.getDayOfMonth()),
                         monthLocalDate.toString(d),
-                        monthLocalDate.getMonthOfYear() == monthOfYear,
-                        false,
+                        monthLocalDate.getMonthOfYear() == month,
+                        false,//isSelected
                         isToday(monthLocalDate),
-                        true
+                        true//isSelectable
                 );
                 weekDescriptors.add(cell);
 
                 if (cell.isToday()) {
-                    //第一次打开,被选中的日期
+                    //讓當前被選中的日期為當前時間
                     mCurrentSelectedCell = cell;
                 }
 
