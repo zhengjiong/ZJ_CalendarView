@@ -127,7 +127,7 @@ public class CalendarPickerView extends ViewPager{
 
         if (monthLocalDate.withDayOfMonth(1).getDayOfWeek() != DateTimeConstants.SUNDAY) {
             //如果本月的第一天不是星期天,則顯示上一個星期
-            monthLocalDate = monthLocalDate.withDayOfMonth(1).minusWeeks(1).withDayOfWeek(7);
+            monthLocalDate = monthLocalDate.withDay1OfMonth(1).minusWeeks(1).withDayOfWeek(7);
         }
 
         for (int i = 0; i < 6; i++) {//一月顯示六周的數據
