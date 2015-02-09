@@ -125,9 +125,7 @@ public class CalendarPickerView extends ViewPager{
 
         List<List<MonthCellDescriptor>> monthDescriLists = Lists.newArrayList();
 
-        if (monthLocalDate.withDayOfMonth(1).getDayOfWeek() == DateTimeConstants.SUNDAY) {
-            monthLocalDate = monthLocalDate.withDayOfMonth(1);
-        } else {
+        if (monthLocalDate.withDayOfMonth(1).getDayOfWeek() != DateTimeConstants.SUNDAY) {
             //如果本月的第一天不是星期天,則顯示上一個星期
             monthLocalDate = monthLocalDate.withDayOfMonth(1).minusWeeks(1).withDayOfWeek(7);
         }
