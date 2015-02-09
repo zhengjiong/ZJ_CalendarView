@@ -84,7 +84,8 @@ public class CalendarPickerView extends ViewPager{
 
 
         LocalDate countDate = new LocalDate(minDate.getYear(), minDate.getMonthOfYear(), 1);
-        //相差的月數
+
+        //最小時間和最大時間相差的月數
         int monthsCount = Months.monthsBetween(minDate, maxDate).getMonths();
 
         /**
@@ -97,6 +98,7 @@ public class CalendarPickerView extends ViewPager{
             mMonths.add(monthDescriptor);
             mCells.add(getMonthCell(countDate.getYear(), countDate.getMonthOfYear()));
 
+            //獲取當前需要顯示的月的position
             if (selectedDay.getYear() == countDate.getYear()
                     && selectedDay.getMonthOfYear() == countDate.getMonthOfYear()){
                 mSelectedPosition = i;//當前要顯示的月的位置

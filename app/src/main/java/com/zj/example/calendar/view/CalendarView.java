@@ -51,6 +51,7 @@ public class CalendarView extends LinearLayout{
      */
     public void populateHeader(){
         LocalDate today = LocalDate.now();
+        //日曆最左邊從星期天開始
         LocalDate firstDay = today.withDayOfWeek(DateTimeConstants.SUNDAY);
 
         DateTimeFormatter formatter = DateTimeFormat.forPattern("E");
