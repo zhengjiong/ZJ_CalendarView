@@ -32,7 +32,7 @@ public class MonthViewFragment extends Fragment{
         fragment.mListener = listener;
         fragment.mMonth = month;
         fragment.mCells = cells;
-        return fragment;
+        return fragment;1
     }
 
     @Override
