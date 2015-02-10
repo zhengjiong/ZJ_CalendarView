@@ -3,5 +3,6 @@
     <declare-styleable name="calendar_cell">
         <attr name="state_today" format="boolean" />
         <attr name="state_current" format="boolean" />
+        <attr name="state_selectable" format="boolean" />
     </declare-styleable>
 </resources>

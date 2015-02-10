@@ -27,7 +27,7 @@ public class ViewPagerDemoActivity extends FragmentActivity{
         //calendarPickerView.init(getSupportFragmentManager(), LocalDate.now(), new LocalDate(2015, 1, 1), new LocalDate(2015, 4, 30));
 
         CalendarView calendarView = (CalendarView) findViewById(R.id.calendar_view);
-        calendarView.init(getSupportFragmentManager(), LocalDate.now(), new LocalDate(2015, 1, 1), new LocalDate(2015, 4, 30));
+        calendarView.init(getSupportFragmentManager(), LocalDate.now(), new LocalDate(2014, 1, 1), new LocalDate(2015, 12, 30));
 
     }
 

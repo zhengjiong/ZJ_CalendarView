@@ -87,18 +87,8 @@ public class CalendarMonthView extends LinearLayout{
                 CalendarCellView cellView = (CalendarCellView) weekView.getChildAt(j);
                 MonthCellDescriptor cellDescriptor = weekData.get(j);
 
-                if (cellDescriptor.isSelected()) {
-                    cellView.setTextColor(0xFFFF00B5);
-                } else {
-                    cellView.setTextColor(0xFF333333);
-                }
-                if (cellDescriptor.isToday()) {
-                    cellView.setTextColor(0xFFFF4D4D);
-                    //這裡要修改為cellview.setToday
-                }
                 if (!cellDescriptor.isCurrentMonth()) {//非當前月
-                    cellView.setTextColor(0xFF9C9C9C);
-                    //這裡要修改為cellView.setEnable();
+                    cellView.setClickable(false);
                 }
 
                 //設置日期
@@ -106,6 +96,10 @@ public class CalendarMonthView extends LinearLayout{
 
                 //設置tag, 讓點擊的時候可以獲取到值
                 cellView.setTag(cellDescriptor);
+
+                cellView.setSelectable(cellDescriptor.isCurrentMonth());
+                cellView.setToday(cellDescriptor.isToday());
+                cellView.setSelected(cellDescriptor.isSelected());
             }
         }
     }

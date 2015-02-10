@@ -59,14 +59,16 @@ public class CalendarPickerView extends ViewPager{
 
         @Override
         public void handleClick(MonthCellDescriptor cell) {
-            //設置之前的Cell為未選擇狀態
-            mCurrentSelectedCell.setSelected(false);
+            if (cell.isCurrentMonth()) {
+                //設置之前的Cell為未選擇狀態
+                mCurrentSelectedCell.setSelected(false);
 
-            //設置當前被點擊的Cell為已選擇狀態
-            mCurrentSelectedCell = cell;
-            mCurrentSelectedCell.setSelected(true);
-            //刷新
-            mMonthPagerAdapter.notifyDataSetChanged();
+                //設置當前被點擊的Cell為已選擇狀態
+                mCurrentSelectedCell = cell;
+                mCurrentSelectedCell.setSelected(true);
+                //刷新
+                mMonthPagerAdapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -149,7 +151,9 @@ public class CalendarPickerView extends ViewPager{
 
                 if (cell.isToday()) {
                     //初始化的時候使用當天時間為选中的日期
+                    cell.setSelected(true);
                     mCurrentSelectedCell = cell;
+
                 }
 
                 monthLocalDate = monthLocalDate.plusDays(1);

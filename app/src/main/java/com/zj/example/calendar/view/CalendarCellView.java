@@ -2,6 +2,7 @@ package com.zj.example.calendar.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.zj.example.calendar.R;
@@ -16,6 +17,7 @@ public class CalendarCellView extends TextView{
 
     private boolean isToday = false;
     private boolean isCurrent = false;
+    private boolean isSelectable = false;
 
     private final int[] STATE_TODAY = {
         R.attr.state_today
@@ -23,6 +25,10 @@ public class CalendarCellView extends TextView{
 
     private final int[] STATE_CURRENT = {
         R.attr.state_current
+    };
+
+    private final int[] STATE_CLICKABLE = {
+        R.attr.state_selectable
     };
 
     public CalendarCellView(Context context) {
@@ -47,6 +53,11 @@ public class CalendarCellView extends TextView{
         refreshDrawableState();
     }
 
+    public void setSelectable(boolean isSelectable) {
+        this.isSelectable = isSelectable;
+        refreshDrawableState();
+    }
+
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
         int[] drawableState = super.onCreateDrawableState(extraSpace + 2);
@@ -54,7 +65,9 @@ public class CalendarCellView extends TextView{
         if (isToday) {
             mergeDrawableStates(drawableState, STATE_TODAY);
         }
-
+        if (isSelectable) {
+            mergeDrawableStates(drawableState, STATE_CLICKABLE);
+        }
         if (isCurrent) {
             mergeDrawableStates(drawableState, STATE_CURRENT);
         }

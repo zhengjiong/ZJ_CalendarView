@@ -12,6 +12,7 @@
         <item name="android:clickable">true</item>
         <!--<item name="android:layout_weight">1</item>-->
         <item name="android:layout_width">0dp</item>
-        <item name="android:textColor">#FF333333</item>
+        <item name="android:textColor">@drawable/cellview_textcolor_selector</item>
+        <item name="android:background">@drawable/cellview_bg_selector</item>
     </style>
 </resources>
