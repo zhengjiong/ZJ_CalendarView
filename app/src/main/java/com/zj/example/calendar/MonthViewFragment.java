@@ -26,7 +26,7 @@ public class MonthViewFragment extends Fragment{
 
     private CalendarMonthView mMonthView;
 
-    public static MonthViewFragment getInstance(CalendarMonthView.DayClickListener listener ,MonthDescriptor month, List<List<MonthCellDescriptor>> cells) {
+    public static MonthViewFragment getInstance(CalendarMonthView.DayClickListener listener, MonthDescriptor month, List<List<MonthCellDescriptor>> cells) {
 
         MonthViewFragment fragment = new MonthViewFragment();
         fragment.mListener = listener;

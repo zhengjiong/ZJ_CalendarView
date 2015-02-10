@@ -98,7 +98,7 @@ public class CalendarPickerView extends ViewPager{
             mMonths.add(monthDescriptor);
             mCells.add(getMonthCell(countDate.getYear(), countDate.getMonthOfYear()));
 
-            //獲取當前需要顯示的月的position
+            //獲取viewpager需要切換到哪個position
             if (selectedDay.getYear() == countDate.getYear()
                     && selectedDay.getMonthOfYear() == countDate.getMonthOfYear()){
                 mSelectedPosition = i;//當前要顯示的月的位置
@@ -122,7 +122,7 @@ public class CalendarPickerView extends ViewPager{
      * @return
      */
     private List<List<MonthCellDescriptor>> getMonthCell(int year, int month) {
-        //月的第一天
+        //指定年月的第一天
         LocalDate monthLocalDate = new LocalDate(year, month, 1);
 
         List<List<MonthCellDescriptor>> monthDescriLists = Lists.newArrayList();
@@ -132,6 +132,7 @@ public class CalendarPickerView extends ViewPager{
             //如果本月的第一天不是星期天,則從上周星期天開始顯示
             monthLocalDate = monthLocalDate.minusWeeks(1).withDayOfWeek(7);
         }
+        //monthLocalDate = monthLocalDate.withDayOfMonth(1)//獲取當月第一天
 
         for (int i = 0; i < 6; i++) {//一月顯示六周的數據
             List<MonthCellDescriptor> weekDescriptors = Lists.newArrayList();
@@ -147,7 +148,7 @@ public class CalendarPickerView extends ViewPager{
                 weekDescriptors.add(cell);
 
                 if (cell.isToday()) {
-                    //讓當前被選中的日期為當前時間
+                    //初始化的時候使用當天時間為选中的日期
                     mCurrentSelectedCell = cell;
                 }
 
