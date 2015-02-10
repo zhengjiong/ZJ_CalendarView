@@ -131,7 +131,7 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener{
     public void onClick(View v) {
         if (listener != null) {
             /**
-             * 處理點擊事件并讓囘調viewpager刷新
+             * 處理點擊事件并讓viewpager囘調刷新
              *
              * 之所以要這樣處理是爲了方便CalendarPickerView刷新,
              * 不然需要把adapter傳遞到這裡才可以刷新

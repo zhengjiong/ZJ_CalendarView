@@ -2,17 +2,11 @@ package com.zj.example.calendar.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
 import com.zj.example.calendar.R;
 import com.zj.example.calendar.bean.MonthCellDescriptor;
 import com.zj.example.calendar.bean.MonthDescriptor;
-
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
 
@@ -81,6 +75,7 @@ public class CalendarMonthView extends LinearLayout{
 
     public void init(DayClickListener listener, MonthDescriptor mMonth, List<List<MonthCellDescriptor>> mCells) {
         for (int i = 0; i < mGridView.getChildCount(); i++) {
+            //獲取周視圖
             CalendarRowView weekView = (CalendarRowView) mGridView.getChildAt(i);
 
             //設置每一天的點擊事件
@@ -106,8 +101,10 @@ public class CalendarMonthView extends LinearLayout{
                     //這裡要修改為cellView.setEnable();
                 }
 
-
+                //設置日期
                 cellView.setText(cellDescriptor.getValue());
+
+                //設置tag, 讓點擊的時候可以獲取到值
                 cellView.setTag(cellDescriptor);
             }
         }

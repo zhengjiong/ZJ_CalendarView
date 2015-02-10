@@ -84,7 +84,8 @@ public class CalendarPickerView extends ViewPager{
 
 
         LocalDate countDate = new LocalDate(minDate.getYear(), minDate.getMonthOfYear(), 1);
-        //相差的月數
+
+        //最小時間和最大時間相差的月數
         int monthsCount = Months.monthsBetween(minDate, maxDate).getMonths();
 
         /**
@@ -97,6 +98,7 @@ public class CalendarPickerView extends ViewPager{
             mMonths.add(monthDescriptor);
             mCells.add(getMonthCell(countDate.getYear(), countDate.getMonthOfYear()));
 
+            //獲取viewpager需要切換到哪個position
             if (selectedDay.getYear() == countDate.getYear()
                     && selectedDay.getMonthOfYear() == countDate.getMonthOfYear()){
                 mSelectedPosition = i;//當前要顯示的月的位置
@@ -116,19 +118,20 @@ public class CalendarPickerView extends ViewPager{
     /**
      * 獲取給定年月的數據
      * @param year
-     * @param monthOfYear
+     * @param month
      * @return
      */
-    private List<List<MonthCellDescriptor>> getMonthCell(int year, int monthOfYear) {
+    private List<List<MonthCellDescriptor>> getMonthCell(int year, int month) {
         //指定年月的第一天
-        LocalDate monthLocalDate = new LocalDate(year, monthOfYear, 1);
+        LocalDate monthLocalDate = new LocalDate(year, month, 1);
 
         List<List<MonthCellDescriptor>> monthDescriLists = Lists.newArrayList();
 
-        if (monthLocalDate.withDayOfMonth(1).getDayOfWeek() != DateTimeConstants.SUNDAY) {
-            //如果本月的第一天不是星期天,則顯示上一個星期
-            monthLocalDate = monthLocalDate.withDay1OfMonth(1).minusWeeks(1).withDayOfWeek(7);
+        if (monthLocalDate.getDayOfWeek() != DateTimeConstants.SUNDAY) {
+            //如果本月的第一天不是星期天,則使用上一周的星期天
+            monthLocalDate = monthLocalDate.minusWeeks(1).withDayOfWeek(7);
         }
+        //monthLocalDate = monthLocalDate.withDayOfMonth(1)//獲取當月第一天
 
         for (int i = 0; i < 6; i++) {//一月顯示六周的數據
             List<MonthCellDescriptor> weekDescriptors = Lists.newArrayList();
@@ -136,15 +139,15 @@ public class CalendarPickerView extends ViewPager{
                 MonthCellDescriptor cell = new MonthCellDescriptor(
                         new LocalDate(monthLocalDate.getYear(), monthLocalDate.getMonthOfYear(), monthLocalDate.getDayOfMonth()),
                         monthLocalDate.toString(d),
-                        monthLocalDate.getMonthOfYear() == monthOfYear,
-                        false,
+                        monthLocalDate.getMonthOfYear() == month,
+                        false,//isSelected
                         isToday(monthLocalDate),
-                        true
+                        true//isSelectable
                 );
                 weekDescriptors.add(cell);
 
                 if (cell.isToday()) {
-                    //第一次打开,被选中的日期
+                    //初始化的時候使用當天時間為选中的日期
                     mCurrentSelectedCell = cell;
                 }
 
