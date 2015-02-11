@@ -60,7 +60,7 @@ public class CalendarCellView extends TextView{
 
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
-        int[] drawableState = super.onCreateDrawableState(extraSpace + 2);
+        int[] drawableState = super.onCreateDrawableState(extraSpace + 3);
 
         if (isToday) {
             mergeDrawableStates(drawableState, STATE_TODAY);
