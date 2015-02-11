@@ -2,6 +2,7 @@ package com.zj.example.calendar.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.zj.example.calendar.R;
@@ -114,5 +115,24 @@ public class CalendarMonthView extends LinearLayout{
     private void setDayTextColor(int dayTextColorResId) {
         mGridView.setDayTextColor(dayTextColorResId);
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = 0;
+        for (int i = 0; i < getChildCount(); i++) {
+            View childView = getChildAt(i);
+            childView.measure(
+                    widthMeasureSpec,
+                    MeasureSpec.makeMeasureSpec(childView.getMeasuredHeight(), MeasureSpec.EXACTLY));
+
+            //measureChild(childView, widthMeasureSpec, heightMeasureSpec);
+            height += childView.getMeasuredHeight();
+        }
+
+        setMeasuredDimension(width, height);
+    }
+
 
 }

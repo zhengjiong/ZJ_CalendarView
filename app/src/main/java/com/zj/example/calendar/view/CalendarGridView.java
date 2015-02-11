@@ -2,7 +2,11 @@ package com.zj.example.calendar.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Canvas;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -71,5 +75,30 @@ public class CalendarGridView extends ViewGroup{
 
             rowView.setCellTextColor(colors);
         }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        boolean result = super.onInterceptTouchEvent(ev);
+        //result = true;
+        Log.i("zj", "GridView onInterceptTouchEvent result = " + result);
+        return result;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected void dispatchDraw(@NonNull Canvas canvas) {
+        Log.i("zj", "gridview dispatchDraw");
+        super.dispatchDraw(canvas);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
     }
 }
