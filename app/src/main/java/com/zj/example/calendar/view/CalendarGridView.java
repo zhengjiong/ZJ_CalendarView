@@ -4,16 +4,28 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.Scroller;
 
 /**
  * Created by zhengjiong on 15/1/16.
  */
 public class CalendarGridView extends ViewGroup{
+
+    private VelocityTracker mTracker;
+    private Scroller mScroller;
+
+
+    private int mTouchSlop;
+    private int mMininumFlingVelocity;
+    private int mMaximumFlingVelocity;
 
 
     public CalendarGridView(Context context) {
@@ -26,6 +38,45 @@ public class CalendarGridView extends ViewGroup{
 
     public CalendarGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mTracker = VelocityTracker.obtain();
+        mScroller = new Scroller(context);
+
+        ViewConfiguration viewConfiguration = ViewConfiguration.get(context);
+
+        //手的移动要大于这个距离才开始移动控件,获得能够进行手势滑动的距离
+        mTouchSlop = viewConfiguration.getScaledTouchSlop();
+
+        //获得允许执行一个滑动手势动作的最小速度值
+        mMininumFlingVelocity = viewConfiguration.getScaledMinimumFlingVelocity();
+
+        //获得允许执行一个滑动手势动作的最大速度值
+        mMaximumFlingVelocity = viewConfiguration.getScaledMaximumFlingVelocity();
+
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        int action = MotionEventCompat.getActionMasked(ev);
+
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+
+                break;
+            case MotionEvent.ACTION_MOVE:
+
+                break;
+            case MotionEvent.ACTION_UP:
+
+                break;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        return super.onTouchEvent(event);
     }
 
     @Override
@@ -78,20 +129,6 @@ public class CalendarGridView extends ViewGroup{
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        boolean result = super.onInterceptTouchEvent(ev);
-        //result = true;
-        Log.i("zj", "GridView onInterceptTouchEvent result = " + result);
-        return result;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        return super.onTouchEvent(event);
-    }
-
-    @Override
     protected void dispatchDraw(@NonNull Canvas canvas) {
         Log.i("zj", "gridview dispatchDraw");
         super.dispatchDraw(canvas);
@@ -101,4 +138,6 @@ public class CalendarGridView extends ViewGroup{
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
     }
+
+
 }
